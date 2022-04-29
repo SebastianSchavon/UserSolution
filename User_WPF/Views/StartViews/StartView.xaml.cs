@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using User_WPF.ViewModels.StartViewModels;
 
 namespace User_WPF.Views.StartViews
 {
@@ -22,6 +23,7 @@ namespace User_WPF.Views.StartViews
         public StartView()
         {
             InitializeComponent();
+            DataContext = new StartViewModel();
         }
     }
 }

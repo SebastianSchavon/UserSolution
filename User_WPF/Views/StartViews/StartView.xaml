@@ -11,9 +11,10 @@
         WindowStartupLocation="CenterScreen"
         Height="600"
         Width="400">
-    <Window.DataContext>
-        <viewmodel:StartViewModel/>
-    </Window.DataContext>
+
+    <Window.Resources>
+        <viewmodel:StartViewModel x:Key="viewmodel"/>
+    </Window.Resources>
 
     <Window.Background>
         <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">

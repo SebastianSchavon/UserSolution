@@ -9,7 +9,44 @@
              
              xmlns:viewmodel="clr-namespace:User_WPF.ViewModels.StartViewModels"
              xmlns:model="clr-namespace:User_WPF.Models.Users">
+    <UserControl.Resources>
+        <viewmodel:LoginViewModel x:Key="viewmodel"/>
+        <model:AuthenticateRequest x:Key="authenticaterequest"/>
+    </UserControl.Resources>
+
     <Grid>
-            
+        <StackPanel
+            Margin="20px" 
+            DataContext="{Binding Mode=OneWay, 
+            Source={StaticResource authenticaterequest}}">
+
+            <Label>
+                Username *
+            </Label>
+            <TextBox
+                Text="{Binding Username}">
+
+            </TextBox>
+            <Label>
+                Password *
+            </Label>
+            <TextBox
+                Text="{Binding Password}">
+
+            </TextBox>
+            <Button
+                Content="Login"
+                Width="100px"
+                Margin="20px" 
+                Command="{Binding LoginButtonCommand, 
+                Source={StaticResource viewmodel}}" 
+                CommandParameter="{Binding Mode=OneWay}" 
+                
+                
+
+                >
+
+            </Button>
+        </StackPanel>
     </Grid>
 </UserControl>
