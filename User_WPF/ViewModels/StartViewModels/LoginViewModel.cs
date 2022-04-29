@@ -41,8 +41,6 @@ internal class LoginViewModel : ObservableObject
 
         SaveUserSettings(user);
 
-        Console.WriteLine();
-
     }
 
     

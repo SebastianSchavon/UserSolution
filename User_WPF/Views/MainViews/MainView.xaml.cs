@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using User_WPF.ViewModels.MainViewModels;
 
 namespace User_WPF.Views.MainViews
 {
@@ -22,6 +23,7 @@ namespace User_WPF.Views.MainViews
         public MainView()
         {
             InitializeComponent();
+            DataContext = new MainViewModel();
         }
     }
 }

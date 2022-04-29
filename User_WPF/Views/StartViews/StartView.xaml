@@ -8,7 +8,8 @@
         
         xmlns:viewmodel="clr-namespace:User_WPF.ViewModels.StartViewModels"
         
-        Title="StartView"
+        Name="startView"
+        
         WindowStartupLocation="CenterScreen"
         Height="600"
         Width="400">

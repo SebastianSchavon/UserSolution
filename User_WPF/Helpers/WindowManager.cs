@@ -14,15 +14,16 @@ namespace User_WPF.Helpers
         {
             foreach (Window window in Application.Current.Windows)
             {
-                if (window.Title.Contains(viewTitle))
+                if (window.Name.Contains(viewTitle))
                     window.Close();
+                
             }
         }
 
         public static void OpenMainView()
         {
             MainView mainView = new MainView();
-            mainView.ShowDialog();
+            mainView.Show();
         }
     }
 }

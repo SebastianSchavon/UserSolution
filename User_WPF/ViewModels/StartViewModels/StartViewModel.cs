@@ -22,8 +22,6 @@ namespace User_WPF.ViewModels.StartViewModels
         public LoginViewModel _LoginViewModel { get; set; }
         public RegisterViewModel _RegisterViewModel { get; set; }
 
-
-
         // binds with content of StartViews content control
         private object _ActiveView;
 
@@ -37,21 +35,12 @@ namespace User_WPF.ViewModels.StartViewModels
             }
         }
 
-
-
         public StartViewModel()
         {
-            if(Properties.Settings.Default.Token != null)
-            {
-                WindowManager.CloseWindow("StartView");
-                WindowManager.OpenMainView();
-            }
-                
-
             _LoginViewModel = new LoginViewModel();
             _RegisterViewModel = new RegisterViewModel();
 
-            
+
             ActiveView = _LoginViewModel;
 
             LoginViewCommand = new RelayCommand(o =>
@@ -64,7 +53,15 @@ namespace User_WPF.ViewModels.StartViewModels
                 ActiveView = _RegisterViewModel;
             });
 
-            // Dont ref views in viewmodel, needs to change
+        }
+
+        public void CheckToken()
+        {
+            if(Properties.Settings.Default.Token != null)
+            {
+                WindowManager.CloseWindow("StartView");
+                WindowManager.OpenMainView();
+            }
 
         }
 
