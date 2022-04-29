@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using User_WPF.Core.Base;
 using User_WPF.Core.Commands;
+using User_WPF.Helpers;
 using User_WPF.Views.MainViews;
 
 namespace User_WPF.ViewModels.StartViewModels
@@ -21,6 +22,8 @@ namespace User_WPF.ViewModels.StartViewModels
         public LoginViewModel _LoginViewModel { get; set; }
         public RegisterViewModel _RegisterViewModel { get; set; }
 
+
+
         // binds with content of StartViews content control
         private object _ActiveView;
 
@@ -34,8 +37,17 @@ namespace User_WPF.ViewModels.StartViewModels
             }
         }
 
+
+
         public StartViewModel()
         {
+            if(Properties.Settings.Default.Token != null)
+            {
+                WindowManager.CloseWindow("StartView");
+                WindowManager.OpenMainView();
+            }
+                
+
             _LoginViewModel = new LoginViewModel();
             _RegisterViewModel = new RegisterViewModel();
 
