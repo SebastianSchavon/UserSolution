@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using User_WPF.Views.MainViews;
+using User_WPF.Views.StartViews;
 
 namespace User_WPF.Helpers
 {
@@ -24,6 +25,11 @@ namespace User_WPF.Helpers
         {
             MainView mainView = new MainView();
             mainView.Show();
+        }
+        public static void OpenStartView()
+        {
+            StartView startView = new StartView();
+            startView.Show();
         }
     }
 }

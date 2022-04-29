@@ -8,6 +8,7 @@ using User_WPF.APIService;
 using User_WPF.Core.Base;
 using User_WPF.Core.Commands;
 using User_WPF.Entities;
+using User_WPF.Helpers;
 using User_WPF.Models.Users;
 
 namespace User_WPF.ViewModels.StartViewModels;
@@ -27,7 +28,6 @@ internal class LoginViewModel : ObservableObject
             Login(this);
         });
 
-        
     }
 
     private async void Login(object parameter)
@@ -39,15 +39,11 @@ internal class LoginViewModel : ObservableObject
 
         var user = JsonConvert.DeserializeObject<User>(content);
 
-        SaveUserSettings(user);
+        SettingsManager.StoreAuthenticatedUserSettings(user);
+
+        WindowManager.OpenMainView();
+        WindowManager.CloseWindow("startView");
 
     }
 
-    
-    private void SaveUserSettings(User user)
-    {
-        Properties.Settings.Default.Username = user.Username;
-        Properties.Settings.Default.Token = user.Token;
-        Properties.Settings.Default.Save();
-    }
 }

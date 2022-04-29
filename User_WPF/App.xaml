@@ -4,7 +4,7 @@
              xmlns:local="clr-namespace:User_WPF"
              xmlns:startView="clr-namespace:User_WPF.Views.StartViews"
              xmlns:startViewModel="clr-namespace:User_WPF.ViewModels.StartViewModels"
-             StartupUri="Views/StartViews/StartView.xaml">
+             >
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

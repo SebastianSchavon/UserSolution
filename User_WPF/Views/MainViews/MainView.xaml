@@ -14,15 +14,48 @@
         <viewmodel:MainViewModel x:Key="viewmodel"/>
     </Window.Resources>
 
+    <Window.Background>
+        <LinearGradientBrush StartPoint="0 0" EndPoint="0 1">
+            <LinearGradientBrush.GradientStops>
+                <GradientStop Offset="1." Color="#EDEDF9" />
+                <GradientStop Offset="0" Color="#FFFFFF" />
+            </LinearGradientBrush.GradientStops>
+        </LinearGradientBrush>
+    </Window.Background>
+
     <Grid>
-        <ListView ItemsSource="{Binding Users, Source={StaticResource viewmodel}}" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30px"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <DockPanel 
+            HorizontalAlignment="Stretch"
+            Background="#EDEDF9">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100px"/>
+                    <ColumnDefinition Width="100px"/>
+                </Grid.ColumnDefinitions>
+                <Button
+                    Style="{StaticResource MainButton}" 
+                    Content="Log Out" Command="{Binding 
+                    LogoutButtonCommand, 
+                    Source={StaticResource viewmodel}}"/>
+            </Grid>
+        </DockPanel>
+        <ListView 
+                ItemsSource="{Binding Users, 
+                Source={StaticResource viewmodel}}" 
+                Grid.Row="1">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <TextBlock Text="{Binding Users.Username}" />
-                    
+
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
     </Grid>
-    
+
+
 </Window>

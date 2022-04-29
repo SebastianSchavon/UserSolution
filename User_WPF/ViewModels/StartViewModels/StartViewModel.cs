@@ -55,15 +55,7 @@ namespace User_WPF.ViewModels.StartViewModels
 
         }
 
-        public void CheckToken()
-        {
-            if(Properties.Settings.Default.Token != null)
-            {
-                WindowManager.CloseWindow("StartView");
-                WindowManager.OpenMainView();
-            }
-
-        }
+        
 
     }
 }

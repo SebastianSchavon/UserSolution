@@ -47,7 +47,7 @@
                     Grid.Column="0"
                     Content="Login"
                     IsChecked="True"
-                    Style="{StaticResource MainRadioButton}" 
+                    Style="{StaticResource StartRadioButton}" 
                     Command="{Binding LoginViewCommand, 
                     Source={StaticResource viewmodel}}"
                     >
@@ -56,7 +56,7 @@
                 <RadioButton
                     Grid.Column="1"
                     Content="Register"
-                    Style="{StaticResource MainRadioButton}" 
+                    Style="{StaticResource StartRadioButton}" 
                     Command="{Binding RegisterViewCommand, 
                     Source={StaticResource viewmodel}}"
                     >
