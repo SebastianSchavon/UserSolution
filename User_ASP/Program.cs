@@ -20,7 +20,7 @@ var CustomCorsPolicy = "_customCorsPolicy";
         options.AddPolicy(name: CustomCorsPolicy,
             policy =>
             {
-                policy.WithOrigins("http://localhost:4000")
+                policy.WithOrigins("http://localhost:3000")
                 .WithMethods("GET", "POST")
                 .AllowAnyHeader();
             });

@@ -33,17 +33,34 @@ public class UsersController : ControllerBase
     [HttpPost("authenticate")]
     public IActionResult Authenticate(AuthenticateRequest request)
     {
-        var response = _userService.Authenticate(request);
+        try
+        {
+            var response = _userService.Authenticate(request);
+            return Ok(response);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+        
 
-        return Ok(response);
+        
     }
 
     [AllowAnonymous]
     [HttpPost("register")]
     public IActionResult Register(RegisterRequest request)
     {
-        _userService.Register(request);
-        return Ok(new { message = "Welcome aboard!" });
+        try
+        {
+            _userService.Register(request);
+            return Ok(new { message = "Welcome aboard!" });
+        }
+        catch(Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+
     }
 
     [HttpGet("all")]

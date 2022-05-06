@@ -14,5 +14,6 @@ public class AutoMapperProfile : Profile
         // specify object mappings
         CreateMap<User, AuthenticateResponse>();
         CreateMap<RegisterRequest, User>();
+        CreateMap<User, UserResponse>();
     }
 }

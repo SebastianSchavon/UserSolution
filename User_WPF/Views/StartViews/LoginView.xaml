@@ -47,6 +47,10 @@
                 >
 
             </Button>
+            <TextBlock 
+                Text="{Binding ResponseText, 
+                Source={StaticResource viewmodel}}">
+            </TextBlock>
         </StackPanel>
     </Grid>
 </UserControl>

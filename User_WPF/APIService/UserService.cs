@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using User_WPF.Entities;
@@ -31,24 +32,42 @@ public class UserService : IUserService
             // define the payload to send to API 
             var payload = new StringContent(JsonConvert.SerializeObject(authenticateRequest), Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync(endpoint, payload);
+            //var response = await client.PostAsync(endpoint, payload);
 
-            var currentUser = JsonConvert.DeserializeObject<User>(await response.Content.ReadAsStringAsync());
+            //var currentUser = JsonConvert.DeserializeObject<User>(await response.Content.ReadAsStringAsync());
 
             // returns a HttpResponseMessage object which needs to be deserialized further down to get token value
-            return response;
+            return await client.PostAsync(endpoint, payload);
 
         }
     }
 
     public async Task<HttpResponseMessage> Register(RegisterRequest registerRequest)
     {
-        throw new NotImplementedException();
+        using (var client = new HttpClient())
+        {
+            var endpoint = new Uri("http://localhost:4000/users/register");
+
+            var payload = new StringContent(JsonConvert.SerializeObject(registerRequest), Encoding.UTF8, "application/json");
+
+            // display response message in view
+            return await client.PostAsync(endpoint, payload);
+
+        }
     }
 
     public async Task<HttpResponseMessage> GetAll()
     {
-        throw new NotImplementedException();
+        using (var client = new HttpClient())
+        {
+            var endpoint = new Uri("http://localhost:4000/users/all");
+
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", Properties.Settings.Default.Token);
+
+            // display response message in view
+            return await client.GetAsync(endpoint);
+
+        }
     }
 
     public Task<HttpResponseMessage> GetAuthenticatedUser()

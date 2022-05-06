@@ -1,9 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using User_WPF.APIService;
 using User_WPF.Core.Base;
 using User_WPF.Core.Commands;
@@ -19,7 +14,17 @@ internal class LoginViewModel : ObservableObject
     /// RelayCommand recieves class method as Action. Fire from view.
     /// </summary>
     public RelayCommand LoginButtonCommand { get; set; }
-    
+
+    private string responseText;
+    public string? ResponseText
+    {
+        get { return responseText; }
+        set
+        {
+            responseText = value;
+            OnPropertyChanged();
+        }
+    }
 
     public LoginViewModel()
     {
@@ -34,15 +39,22 @@ internal class LoginViewModel : ObservableObject
     {
         var response = await new UserService().Authenticate(
             LoginButtonCommand.ParameterValue as AuthenticateRequest);
-        
+
         var content = await response.Content.ReadAsStringAsync();
 
-        var user = JsonConvert.DeserializeObject<User>(content);
+        if (response.StatusCode != System.Net.HttpStatusCode.OK)
+        {
+            ResponseText = content;
+        }
+        else
+        {
+            var user = JsonConvert.DeserializeObject<User>(content);
 
-        SettingsManager.StoreAuthenticatedUserSettings(user);
+            SettingsManager.StoreAuthenticatedUserSettings(user);
 
-        WindowManager.OpenMainView();
-        WindowManager.CloseWindow("startView");
+            WindowManager.OpenMainView();
+            WindowManager.CloseWindow("startView");
+        }
 
     }
 

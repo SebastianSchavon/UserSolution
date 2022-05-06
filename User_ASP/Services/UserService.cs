@@ -11,7 +11,7 @@ namespace User_ASP.Services
     {
         AuthenticateResponse Authenticate(AuthenticateRequest request);
         void Register(RegisterRequest request);
-        IEnumerable<User> GetAll();
+        IEnumerable<UserResponse> GetAll();
         User GetById(int id);
     }
 
@@ -36,6 +36,7 @@ namespace User_ASP.Services
         {
             var user = _context.Users.SingleOrDefault(x => x.Username == request.Username);
 
+            // catch the exception in controller?
             if (user == null || !BCrypt.Net.BCrypt.Verify(request.Password, user.PasswordHash))
                 throw new Exception("Thats not the secret word!");
            
@@ -54,7 +55,7 @@ namespace User_ASP.Services
         public void Register(RegisterRequest request)
         {
             if (_context.Users.Any(x => x.Username == request.Username))
-                throw new Exception("Are you an impostor??");
+                throw new Exception("Are you an impostor??? (username already taken)");
 
             var user = _mapper.Map<User>(request);
 
@@ -65,9 +66,16 @@ namespace User_ASP.Services
 
         }
 
-        public IEnumerable<User> GetAll()
+        public IEnumerable<UserResponse> GetAll()
         {
-            return _context.Users;
+            var Users = new List<UserResponse>();
+
+            foreach(var user in _context.Users)
+            {
+                Users.Add(_mapper.Map<UserResponse>(user));
+            }
+
+            return Users;
         }
            
 

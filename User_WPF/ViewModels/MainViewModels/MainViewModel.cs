@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
-
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using User_WPF.APIService;
 using User_WPF.Core.Base;
 using User_WPF.Core.Commands;
 using User_WPF.Entities;
 using User_WPF.Helpers;
+using User_WPF.Models.Users;
 
 namespace User_WPF.ViewModels.MainViewModels;
 
@@ -12,23 +13,26 @@ internal class MainViewModel : ObservableObject
 {
     public RelayCommand LogoutButtonCommand { get; set; }
 
-    public List<User> Users { get; set; }
-    public List<User> _Users
+    public List<UserResponse> users { get; set; }
+    public List<UserResponse> Users
     {
-        get { return Users; }
+        get { return users; }
         set
         {
-            Users = value;
+            users = value;
             OnPropertyChanged();
         }
     }
 
     public MainViewModel()
     {
+        
         LogoutButtonCommand = new RelayCommand(o =>
         {
             Logout();
         });
+
+        GetAllUsers();
     }
 
     private void Logout()
@@ -41,6 +45,11 @@ internal class MainViewModel : ObservableObject
 
     private async void GetAllUsers()
     {
+        var response = await new UserService().GetAll();
 
+        var content = await response.Content.ReadAsStringAsync();
+
+        var allUsers = JsonConvert.DeserializeObject<List<UserResponse>>(content);
+        Users = allUsers;
     }
 }
