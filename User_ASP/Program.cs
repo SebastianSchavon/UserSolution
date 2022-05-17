@@ -43,7 +43,7 @@ var CustomCorsPolicy = "_customCorsPolicy";
     // but why need? cant i access the secret key without it being defined here?
     services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 
-    // configure DI for application services
+    // configure DI (dependancy injections) for application services
     services.AddScoped<IJwtUtils, JwtUtils>();
 
     services.AddScoped<IUserService, UserService>();

@@ -8,7 +8,8 @@
              d:DesignHeight="450" d:DesignWidth="800"
              
              xmlns:viewmodel="clr-namespace:User_WPF.ViewModels.StartViewModels"
-             xmlns:model="clr-namespace:User_WPF.Models.Users" xmlns:components="clr-namespace:User_WPF.Core.Components">
+             xmlns:model="clr-namespace:User_WPF.Models.Users" 
+             xmlns:components="clr-namespace:User_WPF.Core.Components">
     <UserControl.Resources>
         <viewmodel:LoginViewModel x:Key="viewmodel"/>
         <model:AuthenticateRequest x:Key="authenticaterequest"/>
