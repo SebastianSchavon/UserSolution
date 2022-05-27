@@ -9,11 +9,13 @@
              
              xmlns:viewmodel="clr-namespace:User_WPF.ViewModels.StartViewModels"
              xmlns:model="clr-namespace:User_WPF.Models.Users"
+             xmlns:enum="clr-namespace:User_WPF.Helpers"
              xmlns:components="clr-namespace:User_WPF.Core.Components">
-    
+
     <UserControl.Resources>
         <viewmodel:RegisterViewModel x:Key="viewmodel"/>
         <model:RegisterRequest x:Key="registerrequest"/>
+        <enum:EnumBooleanConverter x:Key="EnumBooleanConverter"/>
     </UserControl.Resources>
 
     <Grid>
@@ -22,20 +24,6 @@
             DataContext="{Binding Mode=OneWay, 
             Source={StaticResource registerrequest}}">
 
-            <Label>
-                Firstname *
-            </Label>
-            <TextBox
-                Text="{Binding FirstName}">
-
-            </TextBox>
-            <Label>
-                Lastname *
-            </Label>
-            <TextBox
-                Text="{Binding LastName}">
-
-            </TextBox>
             <Label>
                 Username *
             </Label>
@@ -53,19 +41,160 @@
 
             </components:BindablePasswordBox>
 
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel 
+                    Grid.Column="1" 
+                    HorizontalAlignment="Center"
+                    Margin="0, 20px, 0, 10px">
+                    
+                    <Label 
+                        Margin="0, 0, 0, 5px">
+                        Ship Role
+                    </Label>
+                    
+                    <StackPanel Orientation="Horizontal" >
+                        <RadioButton
+                            VerticalAlignment="Center"
+                            Name="Captain"
+                            GroupName="shiprole"
+                            IsChecked="{Binding ShipRole, 
+                            Converter={StaticResource EnumBooleanConverter}, 
+                            ConverterParameter={x:Static enum:ShipRole.Captain}}">
+                        </RadioButton>
+                        <Label>Captain</Label>
+                    </StackPanel>
+                    
+                    <StackPanel 
+                        Orientation="Horizontal" 
+                        Grid.Row="1">
+                        <RadioButton
+                            VerticalAlignment="Center"
+                            Name="Engineer"
+                            GroupName="shiprole"
+                            IsChecked="{Binding ShipRole, 
+                            Converter={StaticResource EnumBooleanConverter}, 
+                            ConverterParameter={x:Static enum:ShipRole.Engineer}}">
+                        </RadioButton>
+                        <Label>Engineer</Label>
+                    </StackPanel>
+                    
+                    <StackPanel 
+                        Orientation="Horizontal" 
+                        Grid.Row="2">
+                        <RadioButton
+                            VerticalAlignment="Center"
+                            Name="Helmsman"
+                            GroupName="shiprole"
+                            IsChecked="{Binding ShipRole, 
+                            Converter={StaticResource EnumBooleanConverter}, 
+                            ConverterParameter={x:Static enum:ShipRole.Helmsman}}">
+                        </RadioButton>
+                        <Label>Helmsman</Label>
+                    </StackPanel>
+                    
+                    <StackPanel 
+                        Orientation="Horizontal" 
+                        Grid.Row="3">
+                        <RadioButton
+                            VerticalAlignment="Center"
+                            Name="TacticalOfficer"
+                            GroupName="shiprole"
+                            IsChecked="{Binding ShipRole, 
+                            Converter={StaticResource EnumBooleanConverter}, 
+                            ConverterParameter={x:Static enum:ShipRole.TacticalOfficer}}">
+                        </RadioButton>
+                        <Label>Officer</Label>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel 
+                    Grid.Column="3"
+                    HorizontalAlignment="Center"
+                    Margin="0, 20px, 0, 10px">
+                    
+                    <Label 
+                        Margin="0, 0, 0, 5px">
+                        Species *
+                    </Label>
+                    
+                    <StackPanel Orientation="Horizontal">
+                        <RadioButton
+                            VerticalAlignment="Center"
+                            Name="Human"
+                            GroupName="species"
+                           IsChecked="{Binding Species, 
+                            Converter={StaticResource EnumBooleanConverter}, 
+                            ConverterParameter={x:Static enum:Species.Human}}">
+                        </RadioButton>
+                        <Label>Human</Label>
+                    </StackPanel>
+                    
+                    <StackPanel 
+                        Orientation="Horizontal" 
+                        Grid.Row="1">
+                        <RadioButton
+                            VerticalAlignment="Center"
+                            Name="Klingon"                     
+                            GroupName="species"
+                            IsChecked="{Binding Species, 
+                            Converter={StaticResource EnumBooleanConverter}, 
+                            ConverterParameter={x:Static enum:Species.Klingon}}">
+                        </RadioButton>
+                        <Label>Klingon</Label>
+                    </StackPanel>
+                    
+                    <StackPanel 
+                        Orientation="Horizontal" 
+                        Grid.Row="2">
+                        <RadioButton
+                            VerticalAlignment="Center"
+                            Name="Vulcan"
+                            GroupName="species"
+                            IsChecked="{Binding Species, 
+                            Converter={StaticResource EnumBooleanConverter}, 
+                            ConverterParameter={x:Static enum:Species.Vulcan}}">
+                        </RadioButton>
+                        <Label>Vulcan</Label>
+                    </StackPanel>
+                    
+                    <StackPanel 
+                        Orientation="Horizontal" 
+                        Grid.Row="3">
+                        <RadioButton
+                            VerticalAlignment="Center"
+                            Name="Borg"
+                            Content="Borg"
+                            GroupName="species"
+                            IsChecked="{Binding Species, 
+                            Converter={StaticResource EnumBooleanConverter}, 
+                            ConverterParameter={x:Static enum:Species.Borg}}">
+                        </RadioButton>
+                        
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+
             <Button
-            Content="Register"
-            Width="100px"
-            Margin="20px" 
-            Command="{Binding RegisterButtonCommand, 
-            Source={StaticResource viewmodel}}" 
-            CommandParameter="{Binding Mode=OneWay}">
+                Content="Register"
+                Width="100px"
+                Margin="20px" 
+                Command="{Binding RegisterButtonCommand,
+                Source={StaticResource viewmodel}}" 
+                CommandParameter="{Binding Mode=OneWay}">
 
             </Button>
             <TextBlock 
                 Text="{Binding ResponseText, 
                 Source={StaticResource viewmodel}}" >
-                
+
             </TextBlock>
         </StackPanel>
 
